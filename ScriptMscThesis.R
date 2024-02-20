@@ -11,7 +11,7 @@
 
 #--------Master thesis project script----------
 
-setwd("C:/Users/adria/OneDrive - Queensland University of Technology/Thesis/ThesisProject")
+setwd("C:/Users/adria/OneDrive - Queensland University of Technology/Thesis/MscThesisProject")
 
 ##Libraries to load: 
 library(gdata)
@@ -34,6 +34,7 @@ library(magrittr)
 library(ggrepel)
 library(ggspatial)
 library(mapsf)
+library(reshape)
 
 
 #Importing world map and view of the study area: 
@@ -84,9 +85,22 @@ MapSites
 
 
 
-## Data Play around and start of an idea of how it looks like: ##
+# Biomass data download and clean: 
 Biomass2019=read_csv("Data/AUS_LongTransect_Subtropical_fish_biomass-2019_StartWorking.csv")
-head(AUS_LongTransect_Subtropical_fish_biomass_2019_StartWorking)
+head(Biomass2019)
 Biomass2019=Biomass2019[,1:12]
+head(Biomass2019)
+str(Biomass2019)
+Biomass2019$a=as.numeric(Biomass2019$a)
+Biomass2019$b=as.numeric(Biomass2019$b)
+Biomass2019$`B (g)`=as.numeric(Biomass2019$`B (g)`)
+Biomass2019=Biomass2019[complete.cases(Biomass2019), ]
+
+
+# Site by species matrix: 
+site.sp.mat=cast(Biomass2019, Year+id~Fish, value="B (g)", fun.aggregate=mean)
+site.sp.mat=as.data.frame(site.sp.mat)
+site.sp.mat[is.na(site.sp.mat)]=0
+head(site.sp.mat)
 
 
