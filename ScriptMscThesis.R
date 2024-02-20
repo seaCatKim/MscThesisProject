@@ -35,7 +35,7 @@ library(ggrepel)
 library(ggspatial)
 library(mapsf)
 library(reshape)
-
+library(vegan)
 
 #Importing world map and view of the study area: 
 landMass=shapefile("Data/vectorShapefiles/globalLandmass/world.shp")
@@ -94,6 +94,11 @@ str(Biomass2019)
 Biomass2019$a=as.numeric(Biomass2019$a)
 Biomass2019$b=as.numeric(Biomass2019$b)
 Biomass2019$`B (g)`=as.numeric(Biomass2019$`B (g)`)
+# here should have the steps of Biomass standardisation: 
+########
+
+
+# NA removal 
 Biomass2019=Biomass2019[complete.cases(Biomass2019), ]
 
 
@@ -102,5 +107,23 @@ site.sp.mat=cast(Biomass2019, Year+id~Fish, value="B (g)", fun.aggregate=mean)
 site.sp.mat=as.data.frame(site.sp.mat)
 site.sp.mat[is.na(site.sp.mat)]=0
 head(site.sp.mat)
+
+# Bray-Curtis dissimilarity matrix calculation: 
+bray.dist.site.sp.mat=vegdist(site.sp.mat, method="bray")
+
+
+#Load the site decriptive csv
+locs=read.csv("Data/AF_Australia_SitesMar2010toSep2023SUM.csv")
+str(locs)
+
+#bind it to the Biomass data set
+Biomass2019.2=left_join(Biomass2019, locs, by=c("Site"="Site"))
+str(Biomass2019.2)
+summary(is.na(Biomass2019.2$Lat))
+which(is.na(Biomass2019.2$Lat))
+
+
+
+
 
 
