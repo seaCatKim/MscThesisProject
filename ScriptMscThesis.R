@@ -1,8 +1,5 @@
 #Script for my Msc thesis project: 
 
-### SO here as I will add some code, everyone will be able to see it. 
-
-###@Catherine, how does it work tho with you commenting my code etc...? 
 
 # Catherine here adding a comment on my fork. I can send you a "pull request" to include my change
 # you can choose to reject or keep the change into your repo. You should see the "diff" the differences
