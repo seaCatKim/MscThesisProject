@@ -4,14 +4,23 @@
 
 ###@Catherine, how does it work tho with you commenting my code etc...? 
 
-
+# Catherine here adding a comment on my fork. I can send you a "pull request" to include my change
+# you can choose to reject or keep the change into your repo. You should see the "diff" the differences
+# between the two files.
+# Set up your project like the workflows presentation I sent through
 
 
 
 
 #--------Master thesis project script----------
 
-setwd("C:/Users/adria/OneDrive - Queensland University of Technology/Thesis/MscThesisProject")
+# no setting working directory - this is not reproducible
+# when you use RStudio projects the location of the project is automatically the working directory
+# then you should have folders separating out raw_data, data, scripts, figures etc
+# you should not have one giant script for your masters thesis work but scripts for different tasks
+# e.g., cleaning fish data, exploring fish data, etc
+
+# setwd("C:/Users/adria/OneDrive - Queensland University of Technology/Thesis/MscThesisProject")
 
 ##Libraries to load: 
 library(gdata)
